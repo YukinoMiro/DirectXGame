@@ -37,14 +37,30 @@ void GameScene::Initialize() {
 
 	///音声再生
 	voiceHandle_ = audio_->PlayWave(soundDataHandle_, true);
+
+	///音量調整
+	audio_->SetVolume(soundDataHandle_, 0.1f);
+
+	//X,Y,Z方向のスケーリングを設定
+	worldTransform_.scale_ = {5.0f, 5.0f, 5.0f};
+
+	//X,Y,Z軸周りの回転角を設定
+	worldTransform_.rotation_ = {XM_PI / 4.0f, XM_PI / 4.0f, 0.0f};
+
+	//X,Y,Z軸周りの平行移動を設定
+	worldTransform_.translation_ = {10.0f, 10.0f, 10.0f};
+
+	//ワールドトランスフォームの初期設定
+	worldTransform_.Initialize();
+
 }
 
 void GameScene::Update()
 { 
 	XMFLOAT2 position = sprite_->GetPosition(); 
 
-	position.x += 2.0f;
-	position.y += 1.0f;
+	//position.x += 2.0f;
+	//position.y += 1.0f;
 
 	sprite_->SetPosition(position);
 
@@ -57,14 +73,30 @@ void GameScene::Update()
 	//debugText_->Print("kaizokuouni oreha naru.", 50, 50, 1.0f);
 
 	//debugText_->SetPos(50, 70);
-	//debugText_->Printf("year:%d", 2001);
+	//debugText_->Printf("translation:%d", worldTransform_.translation_.x);
 
-	value_++;
+	//value_++;
 
-	std::string strDebug = std::string("Value:") + 
-	std::to_string(value_);
+	std::string strDebug = std::string("translation : (" +
+    std::to_string(worldTransform_.translation_.x) + "," +
+    std::to_string(worldTransform_.translation_.y) + "," +
+	std::to_string(worldTransform_.translation_.z) + ")");
 
 	debugText_->Print(strDebug, 50, 50, 1.0f);
+
+	std::string strDebug2 = std::string("rotation    : (" + 
+	std::to_string(worldTransform_.rotation_.x) + " ," +
+	std::to_string(worldTransform_.rotation_.y) + " ," +
+	std::to_string(worldTransform_.rotation_.z) + " )");
+
+	debugText_->Print(strDebug2, 50, 70, 1.0f);
+
+	std::string strDebug3 = std::string("scale       : (" + 
+	std::to_string(worldTransform_.scale_.x) + " ," +
+	std::to_string(worldTransform_.scale_.y) + " ," +
+	std::to_string(worldTransform_.scale_.z) + " )");
+
+	debugText_->Print(strDebug3, 50, 90, 1.0f);
 }
 
 void GameScene::Draw() {
@@ -107,7 +139,7 @@ void GameScene::Draw() {
 	/// ここに前景スプライトの描画処理を追加できる
 	/// </summary>
 	
-	sprite_->Draw();
+	//sprite_->Draw();
 
 	// デバッグテキストの描画
 	debugText_->DrawAll(commandList);
