@@ -62,7 +62,7 @@ void GameScene::Initialize() {
 
 	viewProjection_.target = {0, 0, 0};
 
-	viewProjection_.up = {0.0f, cosf(XM_PI / 4.0f), 0.0f};
+	viewProjection_.up = {cosf(XM_PI / 4.0f), sinf(XM_PI / 4.0f), 0.0f};
 
 	//viewProjection_.fovAngleY = XMConvertToRadians(10.0f);
 
