@@ -42,6 +42,8 @@ class GameScene {
 	/// </summary>
 	void Draw();
 
+	float viewAngle = 0.0f;
+
   private: // メンバ変数
 	DirectXCommon* dxCommon_ = nullptr;
 	Input* input_ = nullptr;
@@ -63,7 +65,7 @@ class GameScene {
 	Model* model_ = nullptr;
 
 	///ワールドトランスフォーム
-	WorldTransform worldTransform_;
+	WorldTransform worldTransform_[100];
 
 	///ビュープロジェクション
 	ViewProjection viewProjection_;
